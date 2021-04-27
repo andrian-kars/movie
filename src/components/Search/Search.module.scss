@@ -1,6 +1,11 @@
 @import './../../styles/variables';
 
-.trends {
+.search {
+    display: flex;
+    flex-direction: column;
+}
+
+.movies {
     width: 100%;
     display: grid;
     grid-template-columns: 100%;
@@ -15,5 +20,59 @@
 
     @media (min-width: 1100px) {
         grid-template-columns: 25% 25% 25% 25%;
+    }
+}
+
+.form {
+    position: relative;
+    margin: 0 auto 15px;
+}
+
+.textarea {
+    width: 300px;
+    padding: 10px 125px 10px 10px;
+    background-color: $headerColor;
+    border-radius: 10px;
+    font-size: 15px;
+
+    @media (min-width: 469px) {
+        font-size: 17px;
+        width: 400px;
+        padding: 10px 160px 10px 15px;
+    }
+
+    @media (min-width: 768px) {
+        width: 500px;
+    }
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    top: 20px;
+    transform: translateY(-50%);
+    right: 5px;
+    position: absolute;
+
+    @media (min-width: 469px) {
+        right: 10px;
+    }
+}
+
+.button {
+    svg {
+        padding-top: 2px;
+        width: 14px;
+        fill: $secondaryColor;
+        transition: .3s;
+        cursor: pointer;
+
+        @media (min-width: 469px) {
+            width: 18px;
+        }
+
+        &:hover {
+            opacity: 0.6;
+        }
     }
 }

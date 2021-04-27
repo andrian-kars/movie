@@ -1,18 +1,13 @@
-import s from './Users.module.scss'
+import s from './Search.module.scss'
 import { Field, Form, Formik } from 'formik'
-// import { FilterType } from '../../redux/usersReducer'
 import React from 'react'
-import { useSelector } from 'react-redux'
-// import { getUsersFilter } from '../../redux/usersSelectors'
 
 type PropsType = {
-    // onFilterChange: (filter: FilterType) => void
+    getMoviesByName: (page: number, movie: string) => void
 }
 
-type FriendType = 'true' | 'false' | 'null'
 type FormType = {
-    // term: string
-    // friend: FriendType
+    movie: string
 }
 
 const usersSearchFormValidate = (values: any) => {
@@ -20,36 +15,24 @@ const usersSearchFormValidate = (values: any) => {
     return errors
 }
 
-const UsersSearchForm: React.FC<PropsType> = React.memo(({  }) => {
-
-    // const filter = useSelector(getUsersFilter)
+export const SearchForm: React.FC<PropsType> = React.memo(({ getMoviesByName }) => {
 
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
-        const filter: any = {
-            // term: values.term,
-            // friend: values.friend === 'null' ? null : values.friend === 'true' ? true : false
-        }
-        // onFilterChange(filter)
+        getMoviesByName(1, values.movie)
         setSubmitting(false)
     }
 
     return <div className={s.form}>
         <Formik
             enableReinitialize
-            // initialValues={{ term: filter.term, friend: '' + filter.friend as FriendType }}
-            initialValues={{ }}
+            initialValues={{ movie: '' }}
             validate={usersSearchFormValidate}
             onSubmit={submit}
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <Field className={s.textarea} type="text" name="term" placeholder="Type here to search..." />
+                    <Field className={s.textarea} type="text" name="movie" placeholder="Type here to search..." />
                     <div className={s.select}>
-                        <Field as="select" name="friend">
-                            <option value="null">All Users</option>
-                            <option value="true">Followed</option>
-                            <option value="false">Unfollowed</option>
-                        </Field>
                         <button className={s.button} type="submit" disabled={isSubmitting}>
                             <svg viewBox="0 0 20 20">
                                 <path d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
@@ -64,5 +47,3 @@ const UsersSearchForm: React.FC<PropsType> = React.memo(({  }) => {
         </Formik>
     </div>
 })
-
-export default UsersSearchForm
