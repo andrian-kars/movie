@@ -4,7 +4,8 @@
     position: fixed;
     width: 100%;
     display: flex;
-    background-color: $primaryColor;
+    background-color: $headerColor;
+    z-index: 69;
 }
 
 .navigation {

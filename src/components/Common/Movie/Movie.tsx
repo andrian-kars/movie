@@ -12,7 +12,7 @@ export const Movie: React.FC<PropsType> = ({ title, poster, rating }) => {
         <img className={s.image} src={poster} alt={title} />
         <div className={s.info}>
             <h3>{title}</h3>
-            <p>{rating}</p>
+            <p>{rating} / 10</p>
         </div>
     </div>
 }

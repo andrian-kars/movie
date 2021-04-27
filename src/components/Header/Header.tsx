@@ -11,7 +11,7 @@ const Navigation: React.FC = () => {
     return <nav className={s.navigation}>
         <SVGs />
         <div className={s.navigator}>
-            <NavLink title="search" className={s.link} activeClassName={s.active} exact replace to="/">
+            <NavLink title="search" className={s.link} activeClassName={s.active} exact replace to="/search">
                 <svg><use href="#search"></use></svg>
             </NavLink>
         </div>

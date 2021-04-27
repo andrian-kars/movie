@@ -1,8 +1,9 @@
 import { searchEnglishAPI } from "../api"
+import { MovieType } from "../components/types"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
 const initialState = {
-    ratedMovies: [] as Array<any>
+    ratedMovies: [] as Array<MovieType>
 }
 
 export const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -17,7 +18,7 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
 }
 
 export const actions = {
-    setRatedMovies: (ratedMovies: Array<any>) => ({ type: 'M/SEARCH/SET_RATED_MOVIES', ratedMovies: ratedMovies } as const),
+    setRatedMovies: (ratedMovies: Array<MovieType>) => ({ type: 'M/SEARCH/SET_RATED_MOVIES', ratedMovies: ratedMovies } as const),
 }
 
 export const onGetRatedMovies = (page: number): ThunkType => async dispatch => {

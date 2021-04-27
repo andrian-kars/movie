@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { onGetRatedMovies } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
-import s from './Trends.module.scss'
-import { Movie } from './../Common/Movie/Movie'
+import s from './Search.module.scss'
+import { Movie } from '../Common/Movie/Movie'
 import { MovieType } from '../types'
 
-export const Trends: React.FC = () => {
+export const Search: React.FC = () => {
     const ratedMovies = useSelector((state: AppStateType) => state.search.ratedMovies)
 
     const dispatch = useDispatch()
