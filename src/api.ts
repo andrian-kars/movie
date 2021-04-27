@@ -6,10 +6,10 @@ const instance = axios.create({
 
 export const searchEnglishAPI = {
     getMoviesByName(page: number, movie: string) {
-        return instance.get(`search/movie?api_key=db9335d85fa75ffde96f893df33598bb&query=${movie}&page=${page}`)
+        return instance.get(`search/movie?api_key=db9335d85fa75ffde96f893df33598bb&query=${movie}&page=${page}`).then(res => res.data)
     },
     getMovieCredits(movieID: number | null) {
-        return instance.get(`movie/${movieID}?api_key=db9335d85fa75ffde96f893df33598bb`)
+        return instance.get(`movie/${movieID}?api_key=db9335d85fa75ffde96f893df33598bb`).then(res => res.data)
     },
     getRatedMovies(page: number) {
         return instance.get(`movie/top_rated?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}`).then(res => res.data)
