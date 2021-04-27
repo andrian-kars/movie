@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { onGetRatedMovies } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
-import s from './Header.module.scss'
+import s from './Trends.module.scss'
 import { Movie } from './../Common/Movie/Movie'
 
 export const Trends: React.FC = () => {

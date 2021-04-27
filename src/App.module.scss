@@ -3,4 +3,17 @@
 .app {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  margin-top: 116px;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    margin-top: 124px;
+  }
 }

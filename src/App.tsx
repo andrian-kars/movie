@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <div className={s.app}>
       <Header />
-      <main className="main">
+      <main className={s.main}>
         <Switch>
           <Route exact path="/" render={() => <Redirect to={'/trends'} />} />
           <Route path="/trends" render={() => <Trends />} />
