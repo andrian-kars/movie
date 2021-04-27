@@ -1,0 +1,27 @@
+// @import './../../styles/variables';
+
+.movie {
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    width: 100px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
