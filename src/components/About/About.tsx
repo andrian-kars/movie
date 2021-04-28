@@ -4,7 +4,7 @@ import { onSetAboutMovie } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
 import s from './About.module.scss'
 import { MovieType } from '../types'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 export const About: React.FC = memo(() => {
     const aboutMovie: null | MovieType = useSelector((state: AppStateType) => state.search.aboutMovie)
@@ -14,15 +14,13 @@ export const About: React.FC = memo(() => {
 
     useEffect(() => {
         const setAboutMovie = (id: number) => { dispatch(onSetAboutMovie(id)) }
-        !userID ? setAboutMovie(69) : setAboutMovie(+userID)
+        !!userID && setAboutMovie(+userID)
     }, [dispatch, userID])
-
-
-    console.log(aboutMovie);
-    
     
     if (!aboutMovie) {
-        return <div></div>
+        return <div className={s.empty}>
+            <p>To see something select a <NavLink to="/search">movie</NavLink>.</p>
+        </div>
     } else return <div className={s.about}>
         <img className={s.img} src={`https://image.tmdb.org/t/p/w500${aboutMovie.poster_path}`} alt={aboutMovie.title} />
         <div className={s.content}>
@@ -42,6 +40,7 @@ export const About: React.FC = memo(() => {
             </div>
             <p className={s.sub}>Overview</p>
             <p className={s.overview}>{aboutMovie.overview}</p>
+            <button className={s.button}>save</button>
         </div>
     </div>
 })

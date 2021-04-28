@@ -1,11 +1,14 @@
 @import './../../styles/variables';
 
+.empty {
+    a {
+        color: $secondaryColor;
+    }
+}
+
 .about {
     width: 100%;
     padding: 0 20px 30px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
 
     @media (min-width: 512px) {
         padding: 0 40px 40px;
@@ -19,14 +22,11 @@
 }
 
 .img {
+    display: none;
     border-radius: 30px;
-    height: 400px;
-
-    @media (min-width: 512px) {
-        height: auto;
-    }
 
     @media (min-width: 862px) {
+        display: block;
         padding-right: 40px;
     }
 
@@ -196,5 +196,20 @@
             line-height: 26px;
             font-size: 16px;
         }
+    }
+}
+
+.button {
+    margin-top: 40px;
+    background-color: $secondaryColor;
+    line-height: 0;
+    font-size: 20px;
+    padding: 16px 30px;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #466ef3;
     }
 }
