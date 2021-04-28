@@ -19,5 +19,3 @@ export const Movie: React.FC<PropsType> = ({ title, poster, rating, id }) => {
         </div>
     </NavLink>
 }
-
-

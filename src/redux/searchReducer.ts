@@ -10,7 +10,7 @@ const initialState = {
     totalPagesSearch: 1,
     currentPageTrends: 1,
     totalPagesTrends: 1,
-    aboutMovie: {} as MovieType
+    aboutMovie: null as null | MovieType
 }
 
 export const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {

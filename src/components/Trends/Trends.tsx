@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions, onGetRatedMovies } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
@@ -7,7 +7,7 @@ import { Movie } from './../Common/Movie/Movie'
 import { MovieType } from '../types'
 import { Paginator } from './../Common/Paginator/Paginator'
 
-export const Trends: React.FC = () => {
+export const Trends: React.FC = memo(() => {
     const ratedMovies = useSelector((state: AppStateType) => state.search.ratedMovies)
     const currentPage = useSelector((state: AppStateType) => state.search.currentPageTrends)
     const totalPages = useSelector((state: AppStateType) => state.search.totalPagesTrends)
@@ -20,7 +20,7 @@ export const Trends: React.FC = () => {
     }, [dispatch, currentPage])
 
     const onPageChange = (page: number) => dispatch(actions.setCurrentPageTrends(page))
-    
+
     return <div className={s.trends}>
         <div className={s.head}>
             <span className={s.heading}>Trends</span>
@@ -36,4 +36,4 @@ export const Trends: React.FC = () => {
             <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
     </div>
-}
+})

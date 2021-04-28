@@ -17,8 +17,7 @@ const App: React.FC = () => {
           <Route path="/search" render={() => <Search />} />
           <Route path="/trends" render={() => <Trends />} />
           <Route path="/about/:aboutID?" render={() => <About />} />
-          {/* <Route exact path="/users" render={() => <UsersPage />} /> */}
-          {/* <Route exact path="*" render={() => <Suspense fallback={<Preloader />}><Page404 /></Suspense>} /> */}
+          <Route exact path="*" render={() => <Redirect to={'/search'} />} />
         </Switch>
       </main>
     </div>

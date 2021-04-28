@@ -5,10 +5,10 @@ import s from './Search.module.scss'
 import { Movie } from '../Common/Movie/Movie'
 import { SearchForm } from './SearchForm'
 import { MovieType } from '../types'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { Paginator } from './../Common/Paginator/Paginator'
 
-export const Search: React.FC = () => {
+export const Search: React.FC = memo(() => {
     const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
     const currentPage = useSelector((state: AppStateType) => state.search.currentPageSearch)
@@ -18,7 +18,7 @@ export const Search: React.FC = () => {
 
     const getMoviesByName = (page: number, movie: string) => {
         dispatch(actions.setCurrentSearchName(movie))
-        dispatch(onGetMoviesByName(page, movie)) 
+        dispatch(onGetMoviesByName(page, movie))
     }
     const getUpcomingMovies = (page: number) => { dispatch(onGetUpcomingMovies(page)) }
 
@@ -32,7 +32,7 @@ export const Search: React.FC = () => {
     }, [currentPage])
 
     const onPageChange = (page: number) => dispatch(actions.setCurrentPageSearch(page))
-    
+
     return <div className={s.search}>
         <SearchForm getMoviesByName={getMoviesByName} />
         <div className={s.head}>
@@ -49,4 +49,4 @@ export const Search: React.FC = () => {
             <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
     </div>
-}
+})
