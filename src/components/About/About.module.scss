@@ -23,15 +23,10 @@
 
 .img {
     display: none;
-    border-radius: 30px;
 
     @media (min-width: 862px) {
         display: block;
-        padding-right: 40px;
-    }
-
-    @media (min-width: 1200px) {
-        padding-right: 140px;
+        border-radius: 30px;
     }
 }
 
@@ -40,6 +35,7 @@
 
     @media (min-width: 862px) {
         margin-bottom: 0;
+        margin-left: 40px;
     }
 
     .heading {
