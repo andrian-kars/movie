@@ -13,5 +13,8 @@ export const searchEnglishAPI = {
     },
     getRatedMovies(page: number) {
         return instance.get(`movie/top_rated?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}`).then(res => res.data)
+    },
+    getUpcomingMovies(page: number) {
+        return instance.get(`movie/upcoming?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}`).then(res => res.data)
     }
 }

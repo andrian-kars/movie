@@ -38,6 +38,11 @@ export const onGetMoviesByName = (page: number, movie: string): ThunkType => asy
     dispatch(actions.setMovies(moviesData.results))
 }
 
+export const onGetUpcomingMovies = (page: number): ThunkType => async dispatch => {
+    const moviesData = await searchEnglishAPI.getUpcomingMovies(page)
+    dispatch(actions.setMovies(moviesData.results))
+}
+
 export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionsType>
