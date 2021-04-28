@@ -1,4 +1,6 @@
 import s from './Movie.module.scss'
+import imagePlaceholder from './../../../images/imagePlaceholder.jpg'
+import { truncateString } from '../../utils/truncateString';
 
 type PropsType = {
     id: number
@@ -9,10 +11,12 @@ type PropsType = {
 
 export const Movie: React.FC<PropsType> = ({ title, poster, rating }) => {
     return <div className={s.movie}>
-        <img className={s.image} src={poster} alt={title} />
+        <img className={s.image} src={poster === null ? imagePlaceholder : `https://image.tmdb.org/t/p/w500${poster}`} alt={title} />
         <div className={s.info}>
-            <h3>{title}</h3>
+            <h3>{truncateString(title, 25)}</h3>
             <p>{rating} / 10</p>
         </div>
     </div>
 }
+
+
