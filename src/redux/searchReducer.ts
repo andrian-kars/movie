@@ -4,7 +4,9 @@ import { BaseThunkType, InferActionsTypes } from "./store"
 
 const initialState = {
     movies: [] as Array<MovieType>,
-    ratedMovies: [] as Array<MovieType>
+    ratedMovies: [] as Array<MovieType>,
+    currentPage: 1,
+    currentSearchName: ''
 }
 
 export const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -19,6 +21,11 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
                 ...state,
                 movies: action.movies
             }
+        case 'M/SEARCH/SET_CURRENT_SEARCH_NAME':
+            return {
+                ...state,
+                currentSearchName: action.currentSearchName
+            }
         default: return state
     }
 }
@@ -26,6 +33,7 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
 export const actions = {
     setRatedMovies: (ratedMovies: Array<MovieType>) => ({ type: 'M/SEARCH/SET_RATED_MOVIES', ratedMovies: ratedMovies } as const),
     setMovies: (movies: Array<MovieType>) => ({ type: 'M/SEARCH/SET_MOVIES', movies: movies } as const),
+    setCurrentSearchName: (name: string) => ({ type: 'M/SEARCH/SET_CURRENT_SEARCH_NAME', currentSearchName: name } as const),
 }
 
 export const onGetRatedMovies = (page: number): ThunkType => async dispatch => {

@@ -8,13 +8,14 @@ import { MovieType } from '../types'
 
 export const Trends: React.FC = () => {
     const ratedMovies = useSelector((state: AppStateType) => state.search.ratedMovies)
+    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         const getRatedMovies = (page: number) => { dispatch(onGetRatedMovies(page)) }
-        getRatedMovies(1)
-    }, [dispatch])
+        getRatedMovies(currentPage)
+    }, [dispatch, currentPage])
     
     return <div className={s.trends}>
         {ratedMovies.map((m: MovieType) =>

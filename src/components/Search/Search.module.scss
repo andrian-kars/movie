@@ -77,3 +77,12 @@
         }
     }
 }
+
+.emptyError {
+    position: absolute;
+    font-size: 15px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+}

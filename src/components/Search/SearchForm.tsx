@@ -10,8 +10,15 @@ type FormType = {
     movie: string
 }
 
-const usersSearchFormValidate = (values: any) => {
-    const errors = {}
+type ValidType = {
+    movie?: string
+}
+
+const validate = (values: any) => {
+    const errors: ValidType = {}
+    if (!values.movie) {
+        errors.movie = 'You can\'t search for nothing'
+    }
     return errors
 }
 
@@ -26,11 +33,14 @@ export const SearchForm: React.FC<PropsType> = React.memo(({ getMoviesByName }) 
         <Formik
             enableReinitialize
             initialValues={{ movie: '' }}
-            validate={usersSearchFormValidate}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validate={validate}
             onSubmit={submit}
         >
-            {({ isSubmitting }) => (
+            {({ errors, isSubmitting }) => (
                 <Form>
+                    {errors.movie && <span className={s.emptyError}>{errors.movie}</span>}
                     <Field className={s.textarea} type="text" name="movie" placeholder="Type here to search..." />
                     <div className={s.select}>
                         <button className={s.button} type="submit" disabled={isSubmitting}>
