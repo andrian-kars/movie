@@ -6,11 +6,15 @@ import { Movie } from '../Common/Movie/Movie'
 import { SearchForm } from './SearchForm'
 import { MovieType } from '../types'
 import { useEffect } from 'react'
+import { Paginator } from './../Common/Paginator/Paginator'
 
 export const Search: React.FC = () => {
-    const ratedMovies = useSelector((state: AppStateType) => state.search.movies)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
+    const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
+    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
+    const totalPages = useSelector((state: AppStateType) => state.search.totalPages)
+    console.log(totalPages);
+    
 
     const dispatch = useDispatch()
 
@@ -27,15 +31,22 @@ export const Search: React.FC = () => {
             getUpcomingMovies(currentPage)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [currentPage])
     
     return <div className={s.search}>
-        <span>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
         <SearchForm getMoviesByName={getMoviesByName} />
+        <div className={s.head}>
+            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+            <Paginator currentPage={currentPage} totalPages={totalPages}  />
+        </div>
         <div className={s.movies}>
-            {ratedMovies.map((m: MovieType) =>
+            {movies.map((m: MovieType) =>
                 <Movie key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
             )}
+        </div>
+        <div className={s.head}>
+            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+            <Paginator currentPage={currentPage} totalPages={totalPages} />
         </div>
     </div>
 }

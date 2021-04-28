@@ -19,6 +19,9 @@ const validate = (values: any) => {
     if (!values.movie) {
         errors.movie = 'You can\'t search for nothing'
     }
+    if (values.movie.length > 30) {
+        errors.movie = 'You are gay'
+    }
     return errors
 }
 
@@ -41,7 +44,7 @@ export const SearchForm: React.FC<PropsType> = React.memo(({ getMoviesByName }) 
             {({ errors, isSubmitting }) => (
                 <Form>
                     {errors.movie && <span className={s.emptyError}>{errors.movie}</span>}
-                    <Field className={s.textarea} type="text" name="movie" placeholder="Type here to search..." />
+                    <Field className={s.textarea} maxLength="30" type="text" name="movie" placeholder="Type here to search..." />
                     <div className={s.select}>
                         <button className={s.button} type="submit" disabled={isSubmitting}>
                             <svg viewBox="0 0 20 20">

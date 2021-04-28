@@ -1,0 +1,33 @@
+@import './../../../styles/variables';
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.pages {
+    border: none;
+    margin-left: 10px;
+    color: $whiteColor;
+    background-color: $headerColor;
+    font-size: 17px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+
+    @media (min-width: 469px) {
+        font-size: 22px;
+        padding: 10px 30px;
+    }
+
+    &:hover {
+        color: $secondaryColor;
+    }
+}
+
+.selectedPage {
+    color: $secondaryColor;
+}
