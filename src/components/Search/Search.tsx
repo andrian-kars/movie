@@ -11,10 +11,8 @@ import { Paginator } from './../Common/Paginator/Paginator'
 export const Search: React.FC = () => {
     const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
-    const totalPages = useSelector((state: AppStateType) => state.search.totalPages)
-    console.log(totalPages);
-    
+    const currentPage = useSelector((state: AppStateType) => state.search.currentPageSearch)
+    const totalPages = useSelector((state: AppStateType) => state.search.totalPagesSearch)
 
     const dispatch = useDispatch()
 
@@ -32,12 +30,14 @@ export const Search: React.FC = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage])
+
+    const onPageChange = (page: number) => dispatch(actions.setCurrentPageSearch(page))
     
     return <div className={s.search}>
         <SearchForm getMoviesByName={getMoviesByName} />
         <div className={s.head}>
             <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages}  />
+            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
         <div className={s.movies}>
             {movies.map((m: MovieType) =>
@@ -46,7 +46,7 @@ export const Search: React.FC = () => {
         </div>
         <div className={s.head}>
             <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages} />
+            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
     </div>
 }

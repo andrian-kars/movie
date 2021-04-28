@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { onGetRatedMovies } from '../../redux/searchReducer'
+import { actions, onGetRatedMovies } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Trends.module.scss'
 import { Movie } from './../Common/Movie/Movie'
@@ -9,8 +9,8 @@ import { Paginator } from './../Common/Paginator/Paginator'
 
 export const Trends: React.FC = () => {
     const ratedMovies = useSelector((state: AppStateType) => state.search.ratedMovies)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
-    const totalPages = useSelector((state: AppStateType) => state.search.totalPages)
+    const currentPage = useSelector((state: AppStateType) => state.search.currentPageTrends)
+    const totalPages = useSelector((state: AppStateType) => state.search.totalPagesTrends)
 
     const dispatch = useDispatch()
 
@@ -18,11 +18,13 @@ export const Trends: React.FC = () => {
         const getRatedMovies = (page: number) => { dispatch(onGetRatedMovies(page)) }
         getRatedMovies(currentPage)
     }, [dispatch, currentPage])
+
+    const onPageChange = (page: number) => dispatch(actions.setCurrentPageTrends(page))
     
     return <div className={s.trends}>
         <div className={s.head}>
             <span className={s.heading}>Trends</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages} />
+            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
         <div className={s.movies}>
             {ratedMovies.map((m: MovieType) =>
@@ -31,7 +33,7 @@ export const Trends: React.FC = () => {
         </div>
         <div className={s.head}>
             <span className={s.heading}>Trends</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages} />
+            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
         </div>
     </div>
 }

@@ -1,16 +1,12 @@
-// import { memo } from 'react'
-import { useDispatch } from 'react-redux'
-import { actions } from '../../../redux/searchReducer'
 import s from './Paginator.module.scss'
 
 type PropsType = {
     totalPages: number
     currentPage: number
+    onPageChange: (page: number) => void
 }
 
-export const Paginator: React.FC<PropsType> = ({ totalPages, currentPage = 1, } ) => {
-    const dispatch = useDispatch()
-    const onPageChange = (page: number) => dispatch(actions.setCurrentPage(page))
+export const Paginator: React.FC<PropsType> = ({ totalPages, currentPage = 1, onPageChange } ) => {
     
     const maxPages: number = 3
 
