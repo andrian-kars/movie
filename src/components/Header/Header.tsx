@@ -11,22 +11,22 @@ const Navigation: React.FC = () => {
     return <nav className={s.navigation}>
         <SVGs />
         <div className={s.navigator}>
-            <NavLink title="search" className={s.link} activeClassName={s.active} exact replace to="/search">
+            <NavLink title="search" className={s.link} activeClassName={s.active} replace to="/search">
                 <svg><use href="#search"></use></svg>
             </NavLink>
         </div>
         <div className={s.navigator}>
-            <NavLink title="trends" className={s.link} activeClassName={s.active} exact replace to="/trends">
+            <NavLink title="trends" className={s.link} activeClassName={s.active} replace to="/trends">
                 <svg><use href="#trends"></use></svg>
             </NavLink>
         </div>
         <div className={s.navigator}>
-            <NavLink title="saved" className={s.link} activeClassName={s.active} exact replace to="/saved">
+            <NavLink title="saved" className={s.link} activeClassName={s.active} replace to="/saved">
                 <svg><use href="#saved"></use></svg>
             </NavLink>
         </div>
         <div className={s.navigator}>
-            <NavLink title="about" className={s.link} activeClassName={s.active} exact replace to="/about">
+            <NavLink title="about" className={s.link} activeClassName={s.active} replace to="/about">
                 <svg><use href="#about"></use></svg>
             </NavLink>
         </div>

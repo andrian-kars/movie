@@ -10,6 +10,7 @@ const initialState = {
     totalPagesSearch: 1,
     currentPageTrends: 1,
     totalPagesTrends: 1,
+    aboutMovie: {} as MovieType
 }
 
 export const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -49,6 +50,11 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
                 ...state,
                 totalPagesTrends: action.totalPagesTrends
             }
+        case 'M/SEARCH/SET_ABOUT_MOVIE':
+            return {
+                ...state,
+                aboutMovie: action.aboutMovie
+            }
         default: return state
     }
 }
@@ -63,8 +69,11 @@ export const actions = {
     setRatedMovies: (ratedMovies: Array<MovieType>) => ({ type: 'M/SEARCH/SET_RATED_MOVIES', ratedMovies: ratedMovies } as const),
     setCurrentPageTrends: (page: number) => ({ type: 'M/SEARCH/SET_CURRENT_PAGE_TRENDS', currentPageTrends: page } as const),
     setTotalPagesTrends: (pages: number) => ({ type: 'M/SEARCH/SET_TOTAL_PAGES_TRENDS', totalPagesTrends: pages } as const),
+    // About
+    setAboutMovie: (movie: MovieType) => ({ type: 'M/SEARCH/SET_ABOUT_MOVIE', aboutMovie: movie } as const),
 }
 
+// Search
 export const onGetMoviesByName = (page: number, movie: string): ThunkType => async dispatch => {
     const moviesData = await searchEnglishAPI.getMoviesByName(page, movie)
     dispatch(actions.setTotalPagesSearch(moviesData.total_pages))
@@ -83,6 +92,7 @@ export const onPageChangeSearch = (page: number): ThunkType => async dispatch =>
     dispatch(actions.setMovies(moviesData.results))
 }
 
+// Trends
 export const onGetRatedMovies = (page: number): ThunkType => async dispatch => {
     const ratedMoviesData = await searchEnglishAPI.getRatedMovies(page)
     dispatch(actions.setTotalPagesTrends(ratedMoviesData.total_pages))
@@ -95,6 +105,11 @@ export const onPageChangeTrends = (page: number): ThunkType => async dispatch =>
     dispatch(actions.setMovies(moviesData.results))
 }
 
+// About
+export const onSetAboutMovie = (id: number): ThunkType => async dispatch => {
+    const moviesData = await searchEnglishAPI.getMovieCredits(id)
+    dispatch(actions.setAboutMovie(moviesData))
+}
 
 export type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>

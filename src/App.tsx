@@ -5,6 +5,7 @@ import { Search } from './components/Search/Search'
 import { Route, HashRouter, Switch, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import { About } from './components/About/About'
 
 const App: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const App: React.FC = () => {
           <Route exact path="/" render={() => <Redirect to={'/search'} />} />
           <Route path="/search" render={() => <Search />} />
           <Route path="/trends" render={() => <Trends />} />
-          {/* <Route path="/dialogs/:userId?" render={() => <DialogsPage />} /> */}
+          <Route path="/about/:aboutID?" render={() => <About />} />
           {/* <Route exact path="/users" render={() => <UsersPage />} /> */}
           {/* <Route exact path="*" render={() => <Suspense fallback={<Preloader />}><Page404 /></Suspense>} /> */}
         </Switch>
