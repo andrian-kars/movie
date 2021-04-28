@@ -32,8 +32,12 @@ export const Search: React.FC = memo(() => {
     }, [currentPage])
 
     const onPageChange = (page: number) => dispatch(actions.setCurrentPageSearch(page))
-
-    return <div className={s.search}>
+    if (movies.length < 1) {
+        return <div className={s.noMovies}>
+            <SearchForm getMoviesByName={getMoviesByName} />
+            <span className={s.heading}>No movies found.</span>
+        </div>
+    } else return <div className={s.search}>
         <SearchForm getMoviesByName={getMoviesByName} />
         <div className={s.head}>
             <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>

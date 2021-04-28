@@ -15,21 +15,21 @@
     &:last-child {
         margin-bottom: 40px;
     }
+}
 
+.heading {
+    margin-left: 20px;
+    color: $secondaryColor;
+    background-color: $headerColor;
+    font-size: 17px;
+    padding: 10px 25px;
+    border-radius: 20px;
+}
+
+@media (min-width: 469px) {
     .heading {
-        margin-left: 20px;
-        color: $secondaryColor;
-        background-color: $headerColor;
-        font-size: 17px;
+        font-size: 22px;
         padding: 10px 50px;
-        border-radius: 20px;
-    }
-
-    @media (min-width: 469px) {
-        .heading {
-            font-size: 22px;
-            padding: 10px 50px;
-        }
     }
 }
 
