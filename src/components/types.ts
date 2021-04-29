@@ -23,3 +23,10 @@ export type MovieType = {
     production_countries: Array<{ name: string }>
     spoken_languages: Array<{ name: string }>
 }
+
+export type SavedMovieType = {
+    id: number
+    title: string
+    poster: string
+    rate: number
+}

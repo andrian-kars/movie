@@ -117,6 +117,9 @@
 
     .genres {
         margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
 
         span {
             position: relative;
@@ -151,6 +154,9 @@
     }
 
     .languages {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         margin-bottom: 30px;
 
         span {
@@ -207,5 +213,9 @@
 
     &:hover {
         background-color: #466ef3;
+    }
+
+    &:disabled {
+        background-color: grey;
     }
 }

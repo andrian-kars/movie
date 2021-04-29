@@ -1,10 +1,11 @@
 import { searchEnglishAPI } from "../api"
-import { MovieType } from "../components/types"
+import { MovieType, SavedMovieType } from "../components/types"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
 const initialState = {
     movies: [] as Array<MovieType>,
     ratedMovies: [] as Array<MovieType>,
+    savedMovies: [] as Array<SavedMovieType>,
     currentSearchName: '',
     currentPageSearch: 1,
     totalPagesSearch: 1,
@@ -55,6 +56,11 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
                 ...state,
                 aboutMovie: action.aboutMovie
             }
+        case 'M/SEARCH/SET_SAVED_MOVIE':
+            return {
+                ...state,
+                savedMovies: action.savedMovies
+            }
         default: return state
     }
 }
@@ -71,6 +77,7 @@ export const actions = {
     setTotalPagesTrends: (pages: number) => ({ type: 'M/SEARCH/SET_TOTAL_PAGES_TRENDS', totalPagesTrends: pages } as const),
     // About
     setAboutMovie: (movie: MovieType) => ({ type: 'M/SEARCH/SET_ABOUT_MOVIE', aboutMovie: movie } as const),
+    setSavedMovies: (movies: Array<SavedMovieType>) => ({ type: 'M/SEARCH/SET_SAVED_MOVIE', savedMovies: movies } as const),
 }
 
 // Search
