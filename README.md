@@ -9,6 +9,6 @@
   <a href="https://andrian-kars.github.io/movies/"><strong>« Explore Movies »</strong></a>
 </p>
 
-## React / TypeScript / TMDB API
+## React / TypeScript / Grid / TMDB API
 
 API was provided by [TMDB](https://www.themoviedb.org/).
