@@ -15,17 +15,17 @@
 }
 
 .navigator {
-    padding: 20px 20px;
+    padding: 13px 20px 11px;
 
-    @media (min-width: 412px) {
-        padding: 20px 30px;
+    @media (min-width: 768px) {
+        padding: 15px 30px;
     }
 }
 
 .link {
     svg {
-        width: 26px;
-        height: 26px;
+        width: 22px;
+        height: 22px;
         fill: $whiteColor;
     }
 
@@ -37,8 +37,8 @@
 
     @media (min-width: 768px) {
         svg {
-            width: 32px;
-            height: 32px;
+            width: 26px;
+            height: 26px;
             fill: $whiteColor;
         }
     }

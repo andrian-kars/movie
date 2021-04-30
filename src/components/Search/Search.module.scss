@@ -76,7 +76,7 @@
     }
 }
 
-.select {
+.button {
     display: flex;
     align-items: center;
     top: 20px;
@@ -87,19 +87,17 @@
     @media (min-width: 469px) {
         right: 20px;
     }
-}
 
-.button {
     svg {
-        padding-top: 3px;
-        width: 17px;
+        // padding-top: 3px;
+        width: 20px;
         fill: $secondaryColor;
         transition: .3s;
         cursor: pointer;
 
         @media (min-width: 469px) {
-            padding-top: 6px;
-            width: 22px;
+            // padding-top: 6px;
+            width: 24px;
         }
 
         &:hover {
