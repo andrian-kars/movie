@@ -4,6 +4,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .head {
@@ -31,12 +32,6 @@
         font-size: 22px;
         padding: 10px 50px;
     }
-}
-
-.noMovies {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .movies {

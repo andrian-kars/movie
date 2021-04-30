@@ -1,5 +1,10 @@
 @import './../../styles/variables';
 
+.whrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .empty {
     a {
         color: $secondaryColor;

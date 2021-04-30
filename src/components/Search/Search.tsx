@@ -7,12 +7,16 @@ import { SearchForm } from './SearchForm'
 import { MovieType } from '../types'
 import { memo, useEffect } from 'react'
 import { Paginator } from './../Common/Paginator/Paginator'
+import { Preloader } from './../Common/Preloader/Preloader'
 
 export const Search: React.FC = memo(() => {
     const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
     const currentPage = useSelector((state: AppStateType) => state.search.currentPageSearch)
     const totalPages = useSelector((state: AppStateType) => state.search.totalPagesSearch)
+    // Loaders
+    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
+    const isFetchingPage = useSelector((state: AppStateType) => state.search.isFetchingPage)
 
     const dispatch = useDispatch()
 
@@ -21,6 +25,8 @@ export const Search: React.FC = memo(() => {
         dispatch(onGetMoviesByName(page, movie))
     }
     const getUpcomingMovies = (page: number) => { dispatch(onGetUpcomingMovies(page)) }
+    // To reset to 1 when sth is searched
+    const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPageSearch(page)) }
 
     useEffect(() => {
         if (currentSearchName) {
@@ -32,25 +38,28 @@ export const Search: React.FC = memo(() => {
     }, [currentPage])
 
     const onPageChange = (page: number) => dispatch(actions.setCurrentPageSearch(page))
-    if (movies.length < 1) {
-        return <div className={s.noMovies}>
-            <SearchForm getMoviesByName={getMoviesByName} />
-            <span className={s.heading}>No movies found.</span>
-        </div>
-    } else return <div className={s.search}>
-        <SearchForm getMoviesByName={getMoviesByName} />
-        <div className={s.head}>
-            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
-        </div>
-        <div className={s.movies}>
-            {movies.map((m: MovieType) =>
-                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
-            )}
-        </div>
-        <div className={s.head}>
-            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
-        </div>
+    
+    return <div className={s.search}>
+        <SearchForm getMoviesByName={getMoviesByName} setCurrentPage={setCurrentPage} />
+        {isFetching ? <Preloader /> : movies.length < 1
+            ? <span className={s.heading}>No movies found.</span>
+            : <>
+                <div className={s.head}>
+                    <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+                    <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                </div>
+                {isFetchingPage ? <Preloader />
+                    : <> <div className={s.movies}>
+                            {movies.map((m: MovieType) =>
+                                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
+                            )}
+                        </div>
+                        <div className={s.head}>
+                            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+                            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                        </div>
+                    </>
+                }
+            </>}
     </div>
 })

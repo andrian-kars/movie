@@ -6,9 +6,11 @@ import s from './Saved.module.scss'
 import { Movie } from './../Common/Movie/Movie'
 import { SavedMovieType } from '../types'
 import { NavLink } from 'react-router-dom'
+import { Preloader } from '../Common/Preloader/Preloader'
 
 export const Saved: React.FC = memo(() => {
     const ratedMovies = useSelector((state: AppStateType) => state.search.savedMovies)
+    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
 
     const dispatch = useDispatch()
     const localSavedItems = localStorage.getItem('savedMovies')
@@ -18,15 +20,17 @@ export const Saved: React.FC = memo(() => {
         setSavedMovies(JSON.parse('' + localSavedItems))
     }, [dispatch, localSavedItems])
 
-    if (ratedMovies.length === 0) {
-        return <div className={s.empty}>
-            <p>To see something save a <NavLink to="/search">movie</NavLink>.</p>
-        </div>
-    } else return <div className={s.saved}>
-        <div className={s.movies}>
-            {ratedMovies.map((m: SavedMovieType) =>
-                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster} rating={m.rate} />
-            )}
-        </div>
+    return <div className={s.whrapper}>
+        {isFetching ? <Preloader />
+            : <>
+                {ratedMovies.length === 0 ? <p className={s.empty}>To see something save a <NavLink to="/search">movie</NavLink>.</p>
+                    : <div className={s.saved}>
+                        <div className={s.movies}>
+                            {ratedMovies.map((m: SavedMovieType) =>
+                                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster} rating={m.rate} />
+                            )}
+                        </div>
+                    </div>}
+            </>}
     </div>
 })

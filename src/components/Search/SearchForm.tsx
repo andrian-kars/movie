@@ -4,6 +4,7 @@ import React from 'react'
 
 type PropsType = {
     getMoviesByName: (page: number, movie: string) => void
+    setCurrentPage: (page: number) => void
 }
 
 type FormType = {
@@ -25,10 +26,11 @@ const validate = (values: any) => {
     return errors
 }
 
-export const SearchForm: React.FC<PropsType> = React.memo(({ getMoviesByName }) => {
+export const SearchForm: React.FC<PropsType> = React.memo(({ getMoviesByName, setCurrentPage }) => {
 
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         getMoviesByName(1, values.movie)
+        setCurrentPage(1)
         setSubmitting(false)
     }
 
