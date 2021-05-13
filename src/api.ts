@@ -16,5 +16,8 @@ export const searchEnglishAPI = {
     },
     getUpcomingMovies(page: number) {
         return instance.get(`movie/upcoming?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}`).then(res => res.data)
+    },
+    getMoviesByGenre(page: number, genres: string) {
+        return instance.get(`movie/movie?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}&with_genres=${genres}`).then(res => res.data)
     }
 }

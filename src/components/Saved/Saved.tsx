@@ -4,7 +4,7 @@ import { actions } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Saved.module.scss'
 import { Movie } from './../Common/Movie/Movie'
-import { SavedMovieType } from '../types'
+import { SavedMovieType } from '../../types'
 import { NavLink } from 'react-router-dom'
 import { Preloader } from '../Common/Preloader/Preloader'
 

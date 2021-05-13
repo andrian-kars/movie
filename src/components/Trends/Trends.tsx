@@ -4,7 +4,7 @@ import { actions, onGetRatedMovies } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Trends.module.scss'
 import { Movie } from './../Common/Movie/Movie'
-import { MovieType } from '../types'
+import { MovieType } from '../../types'
 import { Paginator } from './../Common/Paginator/Paginator'
 import { Preloader } from './../Common/Preloader/Preloader'
 

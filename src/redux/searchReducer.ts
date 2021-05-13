@@ -1,5 +1,5 @@
 import { searchEnglishAPI } from "../api"
-import { MovieType, SavedMovieType } from "../components/types"
+import { MovieType, SavedMovieType } from "../types"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
 const initialState = {

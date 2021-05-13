@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { onGetUpcomingMovies, onGetMoviesByName, actions } from '../../redux/searchReducer'
 import { AppStateType } from '../../redux/store'
-import s from './Search.module.scss'
+import s from './Genres.module.scss'
 import { Movie } from '../Common/Movie/Movie'
-import { SearchForm } from './SearchForm'
-import { MovieType } from './../../types'
+import { SearchForm } from './GenresSelect'
+import { MovieType } from '../../types'
 import { memo, useEffect } from 'react'
-import { Paginator } from './../Common/Paginator/Paginator'
-import { Preloader } from './../Common/Preloader/Preloader'
+import { Paginator } from '../Common/Paginator/Paginator'
+import { Preloader } from '../Common/Preloader/Preloader'
 
-export const Search: React.FC = memo(() => {
+export const Genres: React.FC = memo(() => {
     const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
     const currentPage = useSelector((state: AppStateType) => state.search.currentPageSearch)

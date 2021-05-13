@@ -30,3 +30,8 @@ export type SavedMovieType = {
     poster: string
     rate: number
 }
+
+export type GenresType = {
+    id: number
+    name: string
+}

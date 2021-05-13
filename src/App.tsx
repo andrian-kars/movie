@@ -2,13 +2,14 @@ import s from './App.module.scss'
 import { Header } from './components/Header/Header'
 import { Trends } from './components/Trends/Trends'
 import { Search } from './components/Search/Search'
+import { Genres } from './components/Genres/Genres'
 import { Route, HashRouter, Switch, Redirect } from 'react-router-dom'
 import { Provider, useDispatch } from 'react-redux'
 import { store } from './redux/store'
 import { About } from './components/About/About'
 import { memo, useEffect } from 'react'
 import { Saved } from './components/Saved/Saved'
-import { SavedMovieType } from './components/types'
+import { SavedMovieType } from './types'
 import { actions } from './redux/searchReducer'
 
 const App: React.FC = memo(() => {
@@ -32,6 +33,7 @@ const App: React.FC = memo(() => {
         <Switch>
           <Route exact path="/" render={() => <Redirect to={'/search'} />} />
           <Route path="/search" render={() => <Search />} />
+          <Route path="/genres" render={() => <Genres />} />
           <Route path="/trends" render={() => <Trends />} />
           <Route path="/saved" render={() => <Saved />} />
           <Route path="/about/:aboutID?" render={() => <About />} />
