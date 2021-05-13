@@ -1,9 +1,8 @@
 import s from './Movie.module.scss'
 import imagePlaceholder from './../../../images/imagePlaceholder.jpg'
-import { truncateString } from '../../utils/truncateString'
+import { truncateString } from '../../../utils/truncateString'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
-import imgPlaceholder from './../../../images/imagePlaceholder.jpg'
 
 type PropsType = {
     id: number
@@ -17,8 +16,7 @@ export const Movie: React.FC<PropsType> = ({ title, poster, rating, id }) => {
     const [loaded, setLoaded] = useState(false)
 
     return <NavLink className={s.movie} to={'/about/' + id}>
-        {!loaded && <img className={s.image} src={imgPlaceholder} alt={title} />}
-        <img onLoad={() => setLoaded(true)} className={s.image} src={poster === null ? imagePlaceholder : `https://image.tmdb.org/t/p/w500${poster}`} alt={title} />
+        <img onLoad={() => setLoaded(true)} className={s.image} src={poster === null || !loaded ? imagePlaceholder : `https://image.tmdb.org/t/p/w500${poster}`} alt={title} />
         <div className={s.info}>
             <h3>{truncateString(title, 25)}</h3>
             <p>{rating ? `${rating} / 10` : 'Rating is not availible'}</p>
