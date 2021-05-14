@@ -3,11 +3,13 @@ import thunk, { ThunkAction } from 'redux-thunk'
 import { searchReducer } from './searchReducer'
 import { genresReducer } from './genresReducer'
 import { trendsReducer } from './trendsReducer'
+import { aboutReducer } from './aboutReducer'
 
 const rootReducer = combineReducers({
     search: searchReducer,
     genres: genresReducer,
     trends: trendsReducer,
+    about: aboutReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

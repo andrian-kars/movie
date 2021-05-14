@@ -10,7 +10,7 @@ import { About } from './components/About/About'
 import { memo, useEffect } from 'react'
 import { Saved } from './components/Saved/Saved'
 import { SavedMovieType } from './types'
-import { actions } from './redux/searchReducer'
+import { actions } from './redux/aboutReducer'
 
 const App: React.FC = memo(() => {
   const localSavedItems = localStorage.getItem('savedMovies')

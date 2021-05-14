@@ -1,4 +1,4 @@
-import { searchEnglishAPI } from "../api"
+import { api } from "../api"
 import { MovieType } from "../types"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
@@ -64,7 +64,7 @@ export const onGetRatedMovies = (page: number): ThunkType => async(dispatch, get
     } else {
         dispatch(actions.setIsFetchingPage(true))
     }
-    const ratedMoviesData = await searchEnglishAPI.getRatedMovies(page)
+    const ratedMoviesData = await api.getRatedMovies(page)
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(false))
     } else {

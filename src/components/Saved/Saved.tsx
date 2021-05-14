@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actions } from '../../redux/searchReducer'
+import { actions } from '../../redux/aboutReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Saved.module.scss'
 import { Movie } from './../Common/Movie/Movie'
@@ -9,8 +9,8 @@ import { NavLink } from 'react-router-dom'
 import { Preloader } from '../Common/Preloader/Preloader'
 
 export const Saved: React.FC = memo(() => {
-    const ratedMovies = useSelector((state: AppStateType) => state.search.savedMovies)
-    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
+    const ratedMovies = useSelector((state: AppStateType) => state.about.savedMovies)
+    const isFetching = useSelector((state: AppStateType) => state.about.isFetching)
 
     const dispatch = useDispatch()
     const localSavedItems = localStorage.getItem('savedMovies')

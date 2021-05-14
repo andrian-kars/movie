@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: 'https://api.themoviedb.org/3/'
 })
 
-export const searchEnglishAPI = {
+export const api = {
     getMoviesByName(page: number, movie: string) {
         return instance.get(`search/movie?api_key=db9335d85fa75ffde96f893df33598bb&query=${movie}&page=${page}`).then(res => res.data)
     },

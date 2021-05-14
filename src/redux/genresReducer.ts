@@ -1,4 +1,4 @@
-import { searchEnglishAPI } from "../api"
+import { api } from "../api"
 import { GenresType, MovieType } from "../types"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
@@ -79,7 +79,7 @@ export const onGetMoviesByGenre = (page: number, movie: string): ThunkType => as
     } else {
         dispatch(actions.setIsFetchingPage(true))
     }
-    const moviesData = await searchEnglishAPI.getMoviesByGenre(page, movie)
+    const moviesData = await api.getMoviesByGenre(page, movie)
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(false))
     } else {

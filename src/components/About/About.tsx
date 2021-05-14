@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { onSetAboutMovie } from '../../redux/searchReducer'
+import { onSetAboutMovie } from '../../redux/aboutReducer'
 import { AppStateType } from '../../redux/store'
 import s from './About.module.scss'
 import { MovieType, SavedMovieType } from '../../types'
@@ -9,9 +9,9 @@ import { Preloader } from '../Common/Preloader/Preloader'
 import imgPlaceholder from './../../images/imagePlaceholder.jpg'
 
 export const About: React.FC = memo(() => {    
-    const aboutMovie: null | MovieType = useSelector((state: AppStateType) => state.search.aboutMovie)
-    const savedMovies: Array<SavedMovieType> = useSelector((state: AppStateType) => state.search.savedMovies)
-    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
+    const aboutMovie: null | MovieType = useSelector((state: AppStateType) => state.about.aboutMovie)
+    const savedMovies: Array<SavedMovieType> = useSelector((state: AppStateType) => state.about.savedMovies)
+    const isFetching = useSelector((state: AppStateType) => state.about.isFetching)
     
     const dispatch = useDispatch()
     // Getting userID
@@ -48,14 +48,17 @@ export const About: React.FC = memo(() => {
                 {!aboutMovie ? <p className={s.empty}>To see something select a <NavLink to="/search">movie</NavLink>.</p>
                     : <div className={s.about}>
                         <div>
-                            <img onLoad={() => setLoaded(true)} className={s.img} src={aboutMovie.poster_path === null || !loaded ? imgPlaceholder :`https://image.tmdb.org/t/p/w500${aboutMovie.poster_path}`} alt={aboutMovie.title} />
+                            <img onLoad={() => setLoaded(true)} className={s.img} src={aboutMovie.poster_path === null || !loaded
+                                ? imgPlaceholder :`https://image.tmdb.org/t/p/w500${aboutMovie.poster_path}`} alt={aboutMovie.title} />
                         </div>
                         <div className={s.content}>
                             <h2 className={s.heading}>{aboutMovie.title}</h2>
                             <p className={s.tagline}>{aboutMovie.tagline}</p>
                             <div className={s.rates}>
                                 <span className={s.rate}>{aboutMovie.vote_average} / 10 <span>({aboutMovie.vote_count})</span></span>
-                                {/* <span className={s.rate}>{aboutMovie.production_countries[0].name} / {aboutMovie.runtime} min. / {aboutMovie.release_date.slice(0, 4)} year</span> */}
+                                {/* API problems */}
+                                {/* <span className={s.rate}>{aboutMovie.production_countries[0].name} / {aboutMovie.runtime} min. 
+                                / {aboutMovie.release_date.slice(0, 4)} year</span> */}
                                 <span className={s.rate}>{aboutMovie.runtime} min. / {aboutMovie.release_date.slice(0, 4)} year</span>
                             </div>
                             <p className={s.sub}>Genres</p>
@@ -68,7 +71,8 @@ export const About: React.FC = memo(() => {
                             </div>
                             <p className={s.sub}>Overview</p>
                             <p className={s.overview}>{aboutMovie.overview}</p>
-                            {savedMovies.some(el => el.id === aboutMovie.id) ? <button title="You have already saved this movie" disabled className={s.button}>save</button>
+                            {savedMovies.some(el => el.id === aboutMovie.id)
+                                ? <button title="You have already saved this movie" disabled className={s.button}>save</button>
                                 : <button onClick={saveMovie as () => void} className={s.button}>save</button>}
                         </div>
                     </div>}
