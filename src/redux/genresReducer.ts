@@ -70,9 +70,17 @@ export const actions = {
     setGenres: (genres: string) => ({ type: 'M/GENRES/SET_GENRES', genres: genres } as const),
 }
 
+// Genres
+export const onGetAllGenres = (): ThunkType => async dispatch => {
+    actions.setIsFetching(true)
+    const genresData = await api.getAllGenres()
+    actions.setIsFetching(false)
+    dispatch(actions.setAllGenres(genresData.genres))
+}
+
 // Search
 export const onGetMoviesByGenre = (page: number, movie: string): ThunkType => async (dispatch, getState) => {
-    const currentPage = getState().search.currentPageSearch
+    const currentPage = getState().search.currentPage
     // To keep pagination and search it needs two fetches
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(true))

@@ -12,8 +12,8 @@ import { Preloader } from './../Common/Preloader/Preloader'
 export const Search: React.FC = memo(() => {
     const movies = useSelector((state: AppStateType) => state.search.movies)
     const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPageSearch)
-    const totalPages = useSelector((state: AppStateType) => state.search.totalPagesSearch)
+    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
+    const totalPages = useSelector((state: AppStateType) => state.search.totalPages)
     // Loaders
     const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
     const isFetchingPage = useSelector((state: AppStateType) => state.search.isFetchingPage)
@@ -26,7 +26,7 @@ export const Search: React.FC = memo(() => {
     }
     const getUpcomingMovies = (page: number) => { dispatch(onGetUpcomingMovies(page)) }
     // To reset to 1 when sth is searched
-    const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPageSearch(page)) }
+    const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPage(page)) }
 
     useEffect(() => {
         if (currentSearchName) {
@@ -36,8 +36,6 @@ export const Search: React.FC = memo(() => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage])
-
-    const onPageChange = (page: number) => dispatch(actions.setCurrentPageSearch(page))
     
     return <div className={s.search}>
         <SearchForm getMoviesByName={getMoviesByName} setCurrentPage={setCurrentPage} />
@@ -46,7 +44,7 @@ export const Search: React.FC = memo(() => {
             : <>
                 <div className={s.head}>
                     <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-                    <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                    <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                 </div>
                 {isFetchingPage ? <Preloader />
                     : <> <div className={s.movies}>
@@ -56,7 +54,7 @@ export const Search: React.FC = memo(() => {
                         </div>
                         <div className={s.head}>
                             <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
-                            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                         </div>
                     </>
                 }

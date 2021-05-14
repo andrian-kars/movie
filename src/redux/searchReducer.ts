@@ -5,8 +5,8 @@ import { BaseThunkType, InferActionsTypes } from "./store"
 const initialState = {
     movies: [] as Array<MovieType>,
     currentSearchName: '',
-    currentPageSearch: 1,
-    totalPagesSearch: 1,
+    currentPage: 1,
+    totalPages: 1,
     isFetching: false,
     isFetchingPage: false,
 }
@@ -23,15 +23,15 @@ export const searchReducer = (state = initialState, action: ActionsType): Initia
                 ...state,
                 currentSearchName: action.currentSearchName
             }
-        case 'M/SEARCH/SET_CURRENT_PAGE_SEARCH':
+        case 'M/SEARCH/SET_CURRENT_PAGE':
             return {
                 ...state,
-                currentPageSearch: action.currentPageSearch
+                currentPage: action.currentPage
             }
-        case 'M/SEARCH/SET_TOTAL_PAGES_SEARCH':
+        case 'M/SEARCH/SET_TOTAL_PAGES':
             return {
                 ...state,
-                totalPagesSearch: action.totalPagesSearch
+                totalPages: action.totalPages
             }
         case 'M/SEARCH/TOGGLE_IS_FETCHING':
             return {
@@ -54,13 +54,13 @@ export const actions = {
     // Search
     setMovies: (movies: Array<MovieType>) => ({ type: 'M/SEARCH/SET_MOVIES', movies: movies } as const),
     setCurrentSearchName: (name: string) => ({ type: 'M/SEARCH/SET_CURRENT_SEARCH_NAME', currentSearchName: name } as const),
-    setCurrentPageSearch: (page: number) => ({ type: 'M/SEARCH/SET_CURRENT_PAGE_SEARCH', currentPageSearch: page } as const),
-    setTotalPagesSearch: (pages: number) => ({ type: 'M/SEARCH/SET_TOTAL_PAGES_SEARCH', totalPagesSearch: pages } as const),
+    setCurrentPage: (page: number) => ({ type: 'M/SEARCH/SET_CURRENT_PAGE', currentPage: page } as const),
+    setTotalPages: (pages: number) => ({ type: 'M/SEARCH/SET_TOTAL_PAGES', totalPages: pages } as const),
 }
 
 // Search
 export const onGetMoviesByName = (page: number, movie: string): ThunkType => async (dispatch, getState) => {
-    const currentPage = getState().search.currentPageSearch
+    const currentPage = getState().search.currentPage
     // To keep pagination and search it needs two fetches
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(true))
@@ -73,12 +73,12 @@ export const onGetMoviesByName = (page: number, movie: string): ThunkType => asy
     } else {
         dispatch(actions.setIsFetchingPage(false))
     }
-    dispatch(actions.setTotalPagesSearch(moviesData.total_pages))
+    dispatch(actions.setTotalPages(moviesData.total_pages))
     dispatch(actions.setMovies(moviesData.results))
 }
 
 export const onGetUpcomingMovies = (page: number): ThunkType => async (dispatch, getState) => {
-    const currentPage = getState().search.currentPageSearch
+    const currentPage = getState().search.currentPage
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(true))
     } else {
@@ -90,7 +90,7 @@ export const onGetUpcomingMovies = (page: number): ThunkType => async (dispatch,
     } else {
         dispatch(actions.setIsFetchingPage(false))
     }
-    dispatch(actions.setTotalPagesSearch(moviesData.total_pages))
+    dispatch(actions.setTotalPages(moviesData.total_pages))
     dispatch(actions.setMovies(moviesData.results))
 }
 
