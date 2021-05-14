@@ -1,6 +1,6 @@
 import { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { actions, onGetRatedMovies } from '../../redux/searchReducer'
+import { actions, onGetRatedMovies } from '../../redux/trendsReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Trends.module.scss'
 import { Movie } from './../Common/Movie/Movie'
@@ -9,12 +9,12 @@ import { Paginator } from './../Common/Paginator/Paginator'
 import { Preloader } from './../Common/Preloader/Preloader'
 
 export const Trends: React.FC = memo(() => {
-    const ratedMovies = useSelector((state: AppStateType) => state.search.ratedMovies)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPageTrends)
-    const totalPages = useSelector((state: AppStateType) => state.search.totalPagesTrends)
+    const ratedMovies = useSelector((state: AppStateType) => state.trends.ratedMovies)
+    const currentPage = useSelector((state: AppStateType) => state.trends.currentPage)
+    const totalPages = useSelector((state: AppStateType) => state.trends.totalPages)
     // Loaders
-    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
-    const isFetchingPage = useSelector((state: AppStateType) => state.search.isFetchingPage)
+    const isFetching = useSelector((state: AppStateType) => state.trends.isFetching)
+    const isFetchingPage = useSelector((state: AppStateType) => state.trends.isFetchingPage)
 
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ export const Trends: React.FC = memo(() => {
         getRatedMovies(currentPage)
     }, [dispatch, currentPage])
 
-    const onPageChange = (page: number) => dispatch(actions.setCurrentPageTrends(page))
+    const onPageChange = (page: number) => dispatch(actions.setCurrentPage(page))
 
     return <div className={s.trends}>
         {isFetching ? <Preloader />

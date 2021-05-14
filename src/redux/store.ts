@@ -1,9 +1,13 @@
 import { Action, applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk, { ThunkAction } from 'redux-thunk'
 import { searchReducer } from './searchReducer'
+import { genresReducer } from './genresReducer'
+import { trendsReducer } from './trendsReducer'
 
 const rootReducer = combineReducers({
-    search: searchReducer
+    search: searchReducer,
+    genres: genresReducer,
+    trends: trendsReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

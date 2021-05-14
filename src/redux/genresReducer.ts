@@ -12,7 +12,7 @@ const initialState = {
     isFetchingPage: false,
 }
 
-export const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const genresReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         // Loaders
         case 'M/GENRES/TOGGLE_IS_FETCHING':

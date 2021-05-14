@@ -1,5 +1,4 @@
 import s from './Genres.module.scss'
-import { Field, Form, Formik } from 'formik'
 import Select from 'react-dropdown-select'
 import React, { useState } from 'react'
 
