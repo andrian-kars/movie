@@ -24,7 +24,6 @@ export const Genres: React.FC = memo(() => {
     const dispatch = useDispatch()
 
     const setGenres = (genres: Array<GenresType>) => { dispatch(actions.setGenres(genres)) }
-
     const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPage(page)) }
     
     // to get all genres
@@ -37,13 +36,7 @@ export const Genres: React.FC = memo(() => {
     useEffect(() => {
         const getMoviesByGenre = (page: number, genres: string) => { dispatch(onGetMoviesByGenre(page, genres)) }
         getMoviesByGenre(currentPage, genres.map(el => el.id).join(','))
-        console.log(currentPage, genres.map(el => el.name).join(','));
-        
-    
     }, [dispatch, currentPage, genres])
-    console.log(genres);
-    
-
     
     return <div className={s.search}>
         <GenresSelect genres={genres} allGenres={allGenres} setGenres={setGenres} />
@@ -57,7 +50,7 @@ export const Genres: React.FC = memo(() => {
                 {isFetchingPage ? <Preloader />
                     : <> <div className={s.movies}>
                             {movies.map((m: MovieType) =>
-                                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
+                                <Movie genresID={m.genre_ids} release={m.release_date} key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
                             )}
                         </div>
                         <div className={s.head}>

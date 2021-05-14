@@ -36,7 +36,7 @@ export const Trends: React.FC = memo(() => {
                     : <>
                         <div className={s.movies}>
                             {ratedMovies.map((m: MovieType) =>
-                                <Movie key={m.id} id={m.id} title={m.title} poster={`https://image.tmdb.org/t/p/w500${m.poster_path}`} rating={m.vote_average} />
+                                <Movie genresID={m.genre_ids} release={m.release_date} key={m.id} id={m.id} title={m.title} poster={`https://image.tmdb.org/t/p/w500${m.poster_path}`} rating={m.vote_average} />
                             )}
                         </div>
                         <div className={s.head}>

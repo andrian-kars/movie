@@ -29,6 +29,8 @@ export type SavedMovieType = {
     title: string
     poster: string
     rate: number
+    genre_ids: Array<number>
+    release_date: string
 }
 
 export type GenresType = {

@@ -49,7 +49,7 @@ export const Search: React.FC = memo(() => {
                 {isFetchingPage ? <Preloader />
                     : <> <div className={s.movies}>
                             {movies.map((m: MovieType) =>
-                                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
+                                <Movie genresID={m.genre_ids} release={m.release_date} key={m.id} id={m.id} title={m.title} poster={m.poster_path} rating={m.vote_average} />
                             )}
                         </div>
                         <div className={s.head}>

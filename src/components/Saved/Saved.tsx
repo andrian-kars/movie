@@ -27,7 +27,7 @@ export const Saved: React.FC = memo(() => {
                     : <div className={s.saved}>
                         <div className={s.movies}>
                             {ratedMovies.map((m: SavedMovieType) =>
-                                <Movie key={m.id} id={m.id} title={m.title} poster={m.poster} rating={m.rate} />
+                                <Movie genresID={m.genre_ids} release={m.release_date} key={m.id} id={m.id} title={m.title} poster={m.poster} rating={m.rate} />
                             )}
                         </div>
                     </div>}
