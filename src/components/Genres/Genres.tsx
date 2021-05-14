@@ -46,7 +46,7 @@ export const Genres: React.FC = memo(() => {
 
     
     return <div className={s.search}>
-        <GenresSelect genres={genres} allGenres={allGenres} setGenres={setGenres} setCurrentPage={setCurrentPage} />
+        <GenresSelect genres={genres} allGenres={allGenres} setGenres={setGenres} />
         {isFetching ? <Preloader /> : movies.length < 1
             ? <span className={s.heading}>No movies found.</span>
             : <>
@@ -63,7 +63,7 @@ export const Genres: React.FC = memo(() => {
                         <div className={s.head}>
                             <span className={s.heading}>{genres.length === 0 ? 'Select genres' : genres.map(el => el.name).join(', ')}</span>
                             <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-                        </div>setCurrentPage
+                        </div>
                     </>
                 }
             </>}
