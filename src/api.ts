@@ -22,9 +22,10 @@ export const api = {
     },
     // Genres
     getMoviesByGenre(page: number, genres: string) {
-        return instance.get(`movie/movie?api_key=db9335d85fa75ffde96f893df33598bb&page=${page}&with_genres=${genres}`).then(res => res.data)
+        return instance.get(`discover/movie?api_key=db9335d85fa75ffde96f893df33598bb&sort_by=release_date.desc&page=${page}&with_genres=${genres}`)
+            .then(res => res.data)
     },
     getAllGenres() {
-        return instance.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=db9335d85fa75ffde96f893df33598bb`).then(res => res.data)
+        return instance.get(`genre/movie/list?api_key=db9335d85fa75ffde96f893df33598bb`).then(res => res.data)
     }
 }

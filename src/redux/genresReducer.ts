@@ -5,7 +5,7 @@ import { BaseThunkType, InferActionsTypes } from "./store"
 const initialState = {
     movies: [] as Array<MovieType>,
     allGenres: [] as Array<GenresType>,
-    genres: '',
+    genres: [] as Array<GenresType>,
     currentPage: 1,
     totalPages: 0,
     isFetching: false,
@@ -67,7 +67,7 @@ export const actions = {
     setMovies: (movies: Array<MovieType>) => ({ type: 'M/GENRES/SET_MOVIES', movies: movies } as const),
     // Geting all Genres and then use them as options
     setAllGenres: (allGenres: Array<GenresType>) => ({ type: 'M/GENRES/SET_ALL_GENRES', allGenres: allGenres } as const),
-    setGenres: (genres: string) => ({ type: 'M/GENRES/SET_GENRES', genres: genres } as const),
+    setGenres: (genres: Array<GenresType>) => ({ type: 'M/GENRES/SET_GENRES', genres: genres } as const),
 }
 
 // Genres
@@ -79,7 +79,7 @@ export const onGetAllGenres = (): ThunkType => async dispatch => {
 }
 
 // Search
-export const onGetMoviesByGenre = (page: number, movie: string): ThunkType => async (dispatch, getState) => {
+export const onGetMoviesByGenre = (page: number, genres: string): ThunkType => async (dispatch, getState) => {
     const currentPage = getState().search.currentPage
     // To keep pagination and search it needs two fetches
     if (currentPage === 1) {
@@ -87,7 +87,7 @@ export const onGetMoviesByGenre = (page: number, movie: string): ThunkType => as
     } else {
         dispatch(actions.setIsFetchingPage(true))
     }
-    const moviesData = await api.getMoviesByGenre(page, movie)
+    const moviesData = await api.getMoviesByGenre(page, genres)
     if (currentPage === 1) {
         dispatch(actions.setIsFetching(false))
     } else {

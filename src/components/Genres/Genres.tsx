@@ -1,57 +1,57 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { onGetUpcomingMovies, onGetMoviesByName, actions } from '../../redux/searchReducer'
+import { actions, onGetMoviesByGenre } from '../../redux/genresReducer'
 import { AppStateType } from '../../redux/store'
 import s from './Genres.module.scss'
 import { Movie } from '../Common/Movie/Movie'
-import { SearchForm } from './GenresSelect'
-import { MovieType } from '../../types'
+import { GenresSelect } from './GenresSelect'
+import { GenresType, MovieType } from '../../types'
 import { memo, useEffect } from 'react'
 import { Paginator } from '../Common/Paginator/Paginator'
 import { Preloader } from '../Common/Preloader/Preloader'
 import { onGetAllGenres } from '../../redux/genresReducer'
 
 export const Genres: React.FC = memo(() => {
-    const movies = useSelector((state: AppStateType) => state.search.movies)
-    const currentSearchName = useSelector((state: AppStateType) => state.search.currentSearchName)
-    const currentPage = useSelector((state: AppStateType) => state.search.currentPage)
-    const totalPages = useSelector((state: AppStateType) => state.search.totalPages)
+    const movies = useSelector((state: AppStateType) => state.genres.movies)
+    const allGenres = useSelector((state: AppStateType) => state.genres.allGenres)
+    const genres = useSelector((state: AppStateType) => state.genres.genres)
     // Loaders
-    const isFetching = useSelector((state: AppStateType) => state.search.isFetching)
-    const isFetchingPage = useSelector((state: AppStateType) => state.search.isFetchingPage)
+    const currentPage = useSelector((state: AppStateType) => state.genres.currentPage)
+    const totalPages = useSelector((state: AppStateType) => state.genres.totalPages)
+    // Loaders
+    const isFetching = useSelector((state: AppStateType) => state.genres.isFetching)
+    const isFetchingPage = useSelector((state: AppStateType) => state.genres.isFetchingPage)
 
     const dispatch = useDispatch()
 
-    const getMoviesByName = (page: number, movie: string) => {
-        dispatch(actions.setCurrentSearchName(movie))
-        dispatch(onGetMoviesByName(page, movie))
-    }
-    const getUpcomingMovies = (page: number) => { dispatch(onGetUpcomingMovies(page)) }
-    // To reset to 1 when sth is searched
+    const setGenres = (genres: Array<GenresType>) => { dispatch(actions.setGenres(genres)) }
+
     const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPage(page)) }
     
+    // to get all genres
     useEffect(() => {
         const getAllGenres = () => { dispatch(onGetAllGenres()) }
         getAllGenres()
-        console.log('called');
-        
     }, [dispatch])
 
+    // get movies
     useEffect(() => {
-        if (currentSearchName) {
-            getMoviesByName(currentPage, currentSearchName)
-        } else {
-            getUpcomingMovies(currentPage)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPage])
+        const getMoviesByGenre = (page: number, genres: string) => { dispatch(onGetMoviesByGenre(page, genres)) }
+        getMoviesByGenre(currentPage, genres.map(el => el.id).join(','))
+        console.log(currentPage, genres.map(el => el.name).join(','));
+        
+    
+    }, [dispatch, currentPage, genres])
+    console.log(genres);
+    
+
     
     return <div className={s.search}>
-        <SearchForm getMoviesByName={getMoviesByName} setCurrentPage={setCurrentPage} />
+        <GenresSelect genres={genres} allGenres={allGenres} setGenres={setGenres} setCurrentPage={setCurrentPage} />
         {isFetching ? <Preloader /> : movies.length < 1
             ? <span className={s.heading}>No movies found.</span>
             : <>
                 <div className={s.head}>
-                    <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+                    <span className={s.heading}>{genres.length === 0 ? 'Select genres' : genres.map(el => el.name).join(', ')}</span>
                     <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                 </div>
                 {isFetchingPage ? <Preloader />
@@ -61,7 +61,7 @@ export const Genres: React.FC = memo(() => {
                             )}
                         </div>
                         <div className={s.head}>
-                            <span className={s.heading}>{!currentSearchName ? 'Upcoming' : currentSearchName}</span>
+                            <span className={s.heading}>{genres.length === 0 ? 'Select genres' : genres.map(el => el.name).join(', ')}</span>
                             <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                         </div>setCurrentPage
                     </>
