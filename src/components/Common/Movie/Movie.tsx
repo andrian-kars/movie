@@ -17,8 +17,6 @@ type PropsType = {
 
 export const Movie: React.FC<PropsType> = ({ title, poster, rating, id, genresID, release }) => {
     const allGenres = useSelector((state: AppStateType) => state.genres.allGenres)
-    console.log(genresID);
-    
     
     const genresNames = !genresID ? [] : allGenres
         .map(el => genresID.includes(el.id) ? el.name : '')
