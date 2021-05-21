@@ -11,6 +11,7 @@ import { memo, useEffect } from 'react'
 import { Saved } from './components/Saved/Saved'
 import { SavedMovieType } from './types'
 import { actions } from './redux/aboutReducer'
+import { onGetAllGenres } from './redux/genresReducer'
 
 const App: React.FC = memo(() => {
   const localSavedItems = localStorage.getItem('savedMovies')
@@ -25,6 +26,11 @@ const App: React.FC = memo(() => {
       setSavedMovies(JSON.parse(localSavedItems))
     }
   }, [dispatch, localSavedItems])
+
+  // to get all genres
+  useEffect(() => {
+    dispatch(onGetAllGenres())
+  }, [dispatch])
   
   return (
     <div className={s.app}>

@@ -8,7 +8,6 @@ import { GenresType, MovieType } from '../../types'
 import { memo, useEffect } from 'react'
 import { Paginator } from '../Common/Paginator/Paginator'
 import { Preloader } from '../Common/Preloader/Preloader'
-import { onGetAllGenres } from '../../redux/genresReducer'
 
 export const Genres: React.FC = memo(() => {
     const movies = useSelector((state: AppStateType) => state.genres.movies)
@@ -25,12 +24,6 @@ export const Genres: React.FC = memo(() => {
 
     const setGenres = (genres: Array<GenresType>) => { dispatch(actions.setGenres(genres)) }
     const setCurrentPage = (page: number) => { dispatch(actions.setCurrentPage(page)) }
-    
-    // to get all genres
-    useEffect(() => {
-        const getAllGenres = () => { dispatch(onGetAllGenres()) }
-        getAllGenres()
-    }, [dispatch])
 
     // get movies
     useEffect(() => {

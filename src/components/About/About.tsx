@@ -30,6 +30,8 @@ export const About: React.FC = memo(() => {
             title: aboutMovie?.title,
             poster: `https://image.tmdb.org/t/p/w500${aboutMovie?.poster_path}`,
             rate: aboutMovie?.vote_average,
+            release_date: aboutMovie?.release_date,
+            genre_ids: aboutMovie?.genres.map(g => g.id)
         }
         if (savedMovies.length === 0) {
             localStorage.setItem('savedMovies', `[${JSON.stringify(movieToSave)}]`)

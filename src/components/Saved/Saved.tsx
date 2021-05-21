@@ -9,24 +9,23 @@ import { NavLink } from 'react-router-dom'
 import { Preloader } from '../Common/Preloader/Preloader'
 
 export const Saved: React.FC = memo(() => {
-    const ratedMovies = useSelector((state: AppStateType) => state.about.savedMovies)
+    const savedMovies = useSelector((state: AppStateType) => state.about.savedMovies)
     const isFetching = useSelector((state: AppStateType) => state.about.isFetching)
 
     const dispatch = useDispatch()
     const localSavedItems = localStorage.getItem('savedMovies')
 
     useEffect(() => {
-        const setSavedMovies = (movies: Array<SavedMovieType>) => { dispatch(actions.setSavedMovies(movies)) }
-        setSavedMovies(JSON.parse('' + localSavedItems))
+        dispatch(actions.setSavedMovies(JSON.parse('' + localSavedItems)))
     }, [dispatch, localSavedItems])
-
+    
     return <div className={s.whrapper}>
         {isFetching ? <Preloader />
             : <>
-                {ratedMovies.length === 0 ? <p className={s.empty}>To see something save a <NavLink to="/search">movie</NavLink>.</p>
+                {savedMovies === null || savedMovies.length === 0 ? <p className={s.empty}>To see something save a <NavLink to="/search">movie</NavLink>.</p>
                     : <div className={s.saved}>
                         <div className={s.movies}>
-                            {ratedMovies.map((m: SavedMovieType) =>
+                            {savedMovies.map((m: SavedMovieType) =>
                                 <Movie genresID={m.genre_ids} release={m.release_date} key={m.id} id={m.id} title={m.title} poster={m.poster} rating={m.rate} />
                             )}
                         </div>
