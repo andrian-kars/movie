@@ -1,7 +1,7 @@
 import { moviesApi } from "@/api/config";
-import { INITIAL_PAGE } from "@/constants";
+import { INITIAL_PAGE, MoviesPageType } from "@/constants";
 
-export interface UpcomingMovieData {
+export interface MoviesData {
   page: number;
   results: Array<{
     adult: boolean;
@@ -23,8 +23,8 @@ export interface UpcomingMovieData {
   total_results: number;
 }
 
-export const getUpcomingMovie = (page: number = INITIAL_PAGE) =>
-  moviesApi.get("movie/upcoming", {
+export const getMovies = (type: MoviesPageType, page: number = INITIAL_PAGE) =>
+  moviesApi.get(`movie/${type.split("-").join("_")}`, {
     params: {
       page,
     },

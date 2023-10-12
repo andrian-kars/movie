@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { INITIAL_PAGE_PATH, MOVIE_PAGE_PATH } from "@/constants";
-import { InitialPage, MoviePage } from "@/pages";
+import { INITIAL_PAGE_PATH, MOVIES_PAGE_PATH } from "@/constants";
+import { InitialPage, MoviesPage } from "@/pages";
 import { Header } from "@/layouts";
 
 export const App = () => {
@@ -9,7 +9,7 @@ export const App = () => {
       <Header />
       <Routes>
         <Route path={INITIAL_PAGE_PATH} element={<InitialPage />} />
-        <Route path={MOVIE_PAGE_PATH} element={<MoviePage />} />
+        <Route path={`${MOVIES_PAGE_PATH}/:page`} element={<MoviesPage />} />
 
         <Route path="*" element={<InitialPage />} />
       </Routes>

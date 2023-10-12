@@ -1,2 +1,2 @@
 export { InitialPage } from "./InitialPage/InitialPage";
-export { MoviePage } from "./MoviePage/MoviePage";
+export { MoviesPage } from "./MoviesPage/MoviesPage";
