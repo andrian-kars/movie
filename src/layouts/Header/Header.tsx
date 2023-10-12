@@ -11,6 +11,7 @@ import logo from "@/assets/images/logo.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { headerData } from "./headerData";
+import { INITIAL_PAGE_PATH } from "@/constants";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,7 +30,19 @@ export const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Box sx={{ width: 150, mr: 2 }} component="img" src={logo} alt="logo" />
+        <Box
+          component={Link}
+          to={INITIAL_PAGE_PATH}
+          display="flex"
+          alignItems="center"
+        >
+          <Box
+            sx={{ width: 150, mr: 2 }}
+            component="img"
+            src={logo}
+            alt="logo"
+          />
+        </Box>
         <Stack direction="row" spacing={2}>
           {headerData.map(({ id, name }) => {
             const idButton = `${id}-button`;
