@@ -5,16 +5,14 @@ type MainProps = {
   children: ReactNode;
 };
 
-export const Main: FC<MainProps> = ({ children }) => {
-  return (
-    <Box
-      component="main"
-      padding={5}
-      display="flex"
-      flexDirection="column"
-      alignSelf="center"
-    >
-      {children}
-    </Box>
-  );
-};
+export const Main: FC<MainProps> = ({ children }) => (
+  <Box
+    component="main"
+    padding={5}
+    display="flex"
+    flexDirection="column"
+    alignSelf="center"
+  >
+    {children}
+  </Box>
+);

@@ -10,6 +10,7 @@ import {
   TOP_RATED,
   UPCOMING,
 } from "@/constants";
+import { ErrorPage } from "..";
 
 const ARR_OF_PAGES = [POPULAR, NOW_PLAYING, UPCOMING, TOP_RATED];
 
@@ -21,7 +22,7 @@ export const MoviesPage = () => {
   const { isLoading, error } = state;
 
   if (!params.page || !ARR_OF_PAGES.includes(params.page) || error) {
-    return <div>error</div>;
+    return <ErrorPage additionalMessage={error || "Wrong page path"} />;
   }
 
   const currentPage = params.page as MoviesPageType;
