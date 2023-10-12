@@ -1,5 +1,5 @@
 import { MoviesData } from "@/api/moviesService";
-import { Card } from "@/components";
+import { Card, CardSkeleton } from "@/components";
 import {
   INITIAL_PAGE,
   MoviesPageType,
@@ -49,29 +49,31 @@ export const MoviesPageContent: FC<MoviesPageContentProps> = ({
   // @ts-ignore
   const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
     getContent(page);
+    window.scrollTo(0, 0);
   };
 
-  return isLoading ? (
-    <div>loading</div>
-  ) : (
+  return (
     <>
       <Typography variant="h4" pb={2}>
         {pageTitle}
       </Typography>
       <Box display="flex" flexWrap="wrap" gap={3} justifyContent="center">
-        {content?.results.map(
-          ({ title, poster_path, release_date, vote_average }) => (
-            <Card
-              key={title}
-              poster={poster_path}
-              title={title}
-              date={release_date}
-              vote={vote_average}
-            />
-          )
-        )}
+        {isLoading
+          ? [...Array(20)].map((num, i) => <CardSkeleton key={`${num}-${i}`} />)
+          : content?.results.map(
+              ({ title, poster_path, release_date, vote_average }) => (
+                <Card
+                  key={title}
+                  poster={poster_path}
+                  title={title}
+                  date={release_date}
+                  vote={vote_average}
+                />
+              )
+            )}
       </Box>
       <Pagination
+        disabled={isLoading}
         sx={{ pt: 4, margin: "0 auto" }}
         size="large"
         count={
