@@ -8,7 +8,7 @@ import {
   TOP_RATED,
   UPCOMING,
 } from "@/constants";
-import { Box, Typography } from "@mui/material";
+import { Box, Pagination, Typography } from "@mui/material";
 import { FC, useEffect } from "react";
 
 type MoviesPageContentProps = {
@@ -46,14 +46,19 @@ export const MoviesPageContent: FC<MoviesPageContentProps> = ({
     document.title = pageTitle;
   }, [content]);
 
-  console.log(content);
+  // @ts-ignore
+  const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
+    getContent(page);
+  };
 
   return isLoading ? (
     <div>loading</div>
   ) : (
-    <div>
-      <Typography variant="h4">{pageTitle}</Typography>
-      <Box display="flex" flexWrap="wrap" gap={3}>
+    <>
+      <Typography variant="h4" pb={2}>
+        {pageTitle}
+      </Typography>
+      <Box display="flex" flexWrap="wrap" gap={3} justifyContent="center">
         {content?.results.map(
           ({ title, poster_path, release_date, vote_average }) => (
             <Card
@@ -66,6 +71,15 @@ export const MoviesPageContent: FC<MoviesPageContentProps> = ({
           )
         )}
       </Box>
-    </div>
+      <Pagination
+        sx={{ pt: 4, margin: "0 auto" }}
+        size="large"
+        count={
+          content && content.total_pages > 500 ? 500 : content?.total_pages
+        }
+        page={content?.page || INITIAL_PAGE}
+        onChange={handlePageChange}
+      />
+    </>
   );
 };
