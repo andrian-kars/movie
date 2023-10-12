@@ -37,13 +37,28 @@ export const Header = () => {
           alignItems="center"
         >
           <Box
-            sx={{ width: 150, mr: 2 }}
+            sx={{
+              width: {
+                xs: 75,
+                sm: 150,
+              },
+              mr: {
+                xs: 0.5,
+                sm: 2,
+              },
+            }}
             component="img"
             src={logo}
             alt="logo"
           />
         </Box>
-        <Stack direction="row" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={{
+            xs: 0.5,
+            sm: 2,
+          }}
+        >
           {headerData.map(({ id, name }) => {
             const idButton = `${id}-button`;
             const idMenu = `${id}-menu`;
@@ -57,6 +72,12 @@ export const Header = () => {
                 aria-controls={openedMenu === idButton ? idMenu : undefined}
                 aria-haspopup="true"
                 aria-expanded={openedMenu === idButton ? "true" : undefined}
+                sx={{
+                  fontSize: {
+                    xs: 10,
+                    sm: 14,
+                  },
+                }}
               >
                 {name}
               </Button>
