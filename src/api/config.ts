@@ -16,3 +16,9 @@ export const getApiErrorMessage = (e: unknown) => {
 
   return error.message;
 };
+
+export interface ListCardsGeneralData {
+  page: number;
+  total_pages: number;
+  total_results: number;
+}

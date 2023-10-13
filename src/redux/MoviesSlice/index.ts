@@ -11,19 +11,19 @@ import {
 } from "@/constants";
 
 interface MovieState {
-  popular: MoviesData | null;
-  "now-playing": MoviesData | null;
-  upcoming: MoviesData | null;
-  "top-rated": MoviesData | null;
+  [POPULAR]: MoviesData | null;
+  [NOW_PLAYING]: MoviesData | null;
+  [UPCOMING]: MoviesData | null;
+  [TOP_RATED]: MoviesData | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: MovieState = {
-  popular: null,
-  "now-playing": null,
-  upcoming: null,
-  "top-rated": null,
+  [POPULAR]: null,
+  [NOW_PLAYING]: null,
+  [UPCOMING]: null,
+  [TOP_RATED]: null,
   isLoading: true,
   error: null,
 };
@@ -33,20 +33,24 @@ export const moviesSlice = createSlice({
   initialState,
   reducers: {
     setPopular: (state, action: PayloadAction<MoviesData>) => {
-      state.popular = action.payload;
+      state[POPULAR] = action.payload;
       state.isLoading = false;
+      state.error = null;
     },
     setNowPlaying: (state, action: PayloadAction<MoviesData>) => {
-      state["now-playing"] = action.payload;
+      state[NOW_PLAYING] = action.payload;
       state.isLoading = false;
+      state.error = null;
     },
     setUpcoming: (state, action: PayloadAction<MoviesData>) => {
-      state.upcoming = action.payload;
+      state[UPCOMING] = action.payload;
       state.isLoading = false;
+      state.error = null;
     },
     setTopRated: (state, action: PayloadAction<MoviesData>) => {
-      state["top-rated"] = action.payload;
+      state[TOP_RATED] = action.payload;
       state.isLoading = false;
+      state.error = null;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;

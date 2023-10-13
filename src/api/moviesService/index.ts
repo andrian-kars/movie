@@ -1,8 +1,7 @@
-import { moviesApi } from "@/api/config";
+import { ListCardsGeneralData, moviesApi } from "@/api/config";
 import { INITIAL_PAGE, MoviesPageType } from "@/constants";
 
-export interface MoviesData {
-  page: number;
+export interface MoviesData extends ListCardsGeneralData {
   results: Array<{
     adult: boolean;
     backdrop_path: string;
@@ -19,8 +18,6 @@ export interface MoviesData {
     vote_average: number;
     vote_count: number;
   }>;
-  total_pages: number;
-  total_results: number;
 }
 
 export const getMovies = (type: MoviesPageType, page: number = INITIAL_PAGE) =>
